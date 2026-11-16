@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#f3f4f1;--surface:#fff;--ink:#1d2433;--sub:#667085;--line:#dfe2dc;--accent:#2f5d50;--accent-ink:#fff;--today:#e8f1ed;--past:#e4e6e2;--sel:#2f5d50;
+--bg:#f3f4f1;--surface:#fff;--ink:#1d2433;--sub:#667085;--line:#dfe2dc;--accent:#2f5d50;--accent-ink:#fff;--today:#e8f1ed;--past:#e4e6e2;--now:#fff0b3;--nowbd:#d9a400;--sel:#2f5d50;
 --c0:#3b6ea5;--c1:#c8553d;--c2:#4e8a5b;--c3:#8a63a8;--c4:#9a6b1f;--red:#d92d20;--sun:#c8553d;--sat:#3b6ea5}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181b;--surface:#1d2327;--ink:#e8ece9;--sub:#98a3a0;--line:#2c3439;--accent:#7fb8a3;--accent-ink:#10201a;--today:#223229;--past:#181d20;--sel:#7fb8a3;--c0:#7fa8d6;--c1:#e58a74;--c2:#86c096;--c3:#b996d3;--sun:#e58a74;--sat:#7fa8d6;--c4:#d9b066;--red:#ff8a80}}
-:root[data-theme="dark"]{--bg:#14181b;--surface:#1d2327;--ink:#e8ece9;--sub:#98a3a0;--line:#2c3439;--accent:#7fb8a3;--accent-ink:#10201a;--today:#223229;--past:#181d20;--sel:#7fb8a3;--c0:#7fa8d6;--c1:#e58a74;--c2:#86c096;--c3:#b996d3;--sun:#e58a74;--sat:#7fa8d6;--c4:#d9b066;--red:#ff8a80}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181b;--surface:#1d2327;--ink:#e8ece9;--sub:#98a3a0;--line:#2c3439;--accent:#7fb8a3;--accent-ink:#10201a;--today:#223229;--past:#181d20;--now:#4a3f1c;--nowbd:#d9b066;--sel:#7fb8a3;--c0:#7fa8d6;--c1:#e58a74;--c2:#86c096;--c3:#b996d3;--sun:#e58a74;--sat:#7fa8d6;--c4:#d9b066;--red:#ff8a80}}
+:root[data-theme="dark"]{--bg:#14181b;--surface:#1d2327;--ink:#e8ece9;--sub:#98a3a0;--line:#2c3439;--accent:#7fb8a3;--accent-ink:#10201a;--today:#223229;--past:#181d20;--now:#4a3f1c;--nowbd:#d9b066;--sel:#7fb8a3;--c0:#7fa8d6;--c1:#e58a74;--c2:#86c096;--c3:#b996d3;--sun:#e58a74;--sat:#7fa8d6;--c4:#d9b066;--red:#ff8a80}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.5}
@@ -32,7 +32,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .d:nth-child(7n){border-right:0}
 .d:hover{background:var(--today)}
 .d.out{opacity:.45}
-.d.today{background:var(--today)}.d.past{background:var(--past)}.d.past:hover{background:var(--today)}.d.past .n{opacity:.55}.d.past .chip{opacity:.55}
+.d.today{background:var(--now);box-shadow:inset 0 0 0 2px var(--nowbd)}.d.past{background:var(--past)}.d.past:hover{background:var(--today)}.d.past .n{opacity:.55}.d.past .chip{opacity:.55}
 .d.sel{box-shadow:inset 0 0 0 2px var(--sel)}
 .n{font-size:14px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
 .n small{font-size:11px;color:var(--sub);font-weight:400}
@@ -71,6 +71,18 @@ li button:hover{background:var(--today);color:var(--ink)}
 .foot{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
 .sum{font-size:13px;color:var(--sub);margin-left:4px}
 .sync{font-size:12px;color:var(--sub);width:100%}
+.dn{font-weight:500;min-width:24px;height:24px;line-height:24px;text-align:center;border-radius:12px;padding:0 2px}
+.d.today .dn{background:var(--accent);color:var(--accent-ink);font-weight:700;padding:0 6px}
+.up{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.up h2{margin:0 0 10px;font-size:16px}
+.up li{cursor:pointer}.up li:hover{background:var(--today)}
+.up li .t{flex:1 1 100%}
+.ud{font-size:16px;font-variant-numeric:tabular-nums}
+.rb{font-size:12px;padding:1px 9px;border-radius:10px;background:var(--today);color:var(--ink)}
+.rb.hot{background:var(--red);color:#fff}
+:root[data-theme="dark"] .rb.hot{color:#10151a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rb.hot{color:#10151a}}
+.ut{margin-left:auto;font-size:12px;color:var(--sub)}
 </style>
 </head>
 <body>
@@ -87,6 +99,7 @@ li button:hover{background:var(--today);color:var(--ink)}
       <div class="dow"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
       <div class="grid" id="grid"></div>
     </div>
+    <section class="up" id="up"></section>
   </main>
   <aside class="side">
     <h2 id="sd"></h2>
@@ -132,13 +145,22 @@ function render(){
     if(i>=35&&!inM)break;
     var chips=ts.slice(0,3).map(function(t){return '<span class="chip'+(t.done?' done':'')+'" style="background:var(--c'+t.c+')">'+esc(t.title)+'</span>'}).join("");
     h+='<button class="d'+(inM?'':' out')+(k===td?' today':'')+(k<td?' past':'')+(k===sel?' sel':'')+(d.getDay()===0?' sun':'')+(d.getDay()===6?' sat':'')+'" data-k="'+k+'" aria-label="'+(d.getMonth()+1)+'月'+d.getDate()+'日 '+ts.length+'件">'
-      +'<span class="n">'+d.getDate()+(ts.length?'<small>'+dn+'/'+ts.length+'</small>':'')+'</span>'+chips
+      +'<span class="n"><b class="dn">'+d.getDate()+'</b>'+(ts.length?'<small>'+dn+'/'+ts.length+'</small>':'')+'</span>'+chips
       +(ts.length>3?'<span class="more">ほか'+(ts.length-3)+'件</span>':'')
       +(ts.length?'<span class="bar2"><i style="width:'+Math.round(dn/ts.length*100)+'%"></i></span>':'')+'</button>';
   }
   g.innerHTML=h;
   $("sum").textContent=total?"今月 "+done+"/"+total+" 完了":"";
-  renderSide();
+  renderSide();renderUp();
+}
+function renderUp(){
+  var td=iso(now),all=[];
+  Object.keys(data).forEach(function(k){if(k<td)return;(data[k]||[]).forEach(function(t){if(!t.done)all.push({k:k,t:t})})});
+  all.sort(function(a,b){return a.k<b.k?-1:a.k>b.k?1:(a.t.time||"99:99").localeCompare(b.t.time||"99:99")});
+  var top=all.slice(0,5);
+  $("up").innerHTML='<h2>締切が近いタスク</h2>'+(top.length?'<ul>'+top.map(function(x){
+    var d=parse(x.k),n=Math.round((d-parse(td))/86400000),lb=n===0?"今日":n===1?"明日":"あと"+n+"日";
+    return '<li data-k="'+x.k+'" style="--c:var(--c'+x.t.c+')"><b class="ud">'+(d.getMonth()+1)+"/"+d.getDate()+"（"+"日月火水木金土"[d.getDay()]+"）"+'</b><span class="rb'+(n<=1?" hot":"")+'">'+lb+'</span><span class="ut">'+(x.t.time?"締切 "+x.t.time+"　":"")+CATS[x.t.c]+'</span><span class="t">'+esc(x.t.title)+'</span></li>'}).join("")+'</ul>':'<div class="empty">未完了のタスクはありません。</div>');
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function renderSide(){
@@ -156,6 +178,7 @@ function gcal(t){
 }
 function find(id){var a=data[sel]||[];for(var i=0;i<a.length;i++)if(a[i].id===id)return i;return -1}
 $("grid").addEventListener("click",function(e){var b=e.target.closest(".d");if(!b)return;resetEdit();sel=b.dataset.k;var d=parse(sel);if(d.getMonth()!==view.getMonth())view=new Date(d.getFullYear(),d.getMonth(),1);render()});
+$("up").addEventListener("click",function(e){var li=e.target.closest("li");if(!li)return;resetEdit();sel=li.dataset.k;var d=parse(sel);view=new Date(d.getFullYear(),d.getMonth(),1);render()});
 $("prev").onclick=function(){view=new Date(view.getFullYear(),view.getMonth()-1,1);render()};
 $("next").onclick=function(){view=new Date(view.getFullYear(),view.getMonth()+1,1);render()};
 $("today").onclick=function(){resetEdit();now=new Date();sel=iso(now);view=new Date(now.getFullYear(),now.getMonth(),1);render()};
